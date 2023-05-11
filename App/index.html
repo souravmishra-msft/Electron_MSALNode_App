@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MSAL_DesktopApp_Electron</title>
+    <link
+      rel="stylesheet"
+      href="../node_modules/bootstrap/dist/css/bootstrap.min.css"
+    />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand mx-2">MSAL DesktopApp</a>
+      <div class="btn-group ml-auto dropleft">
+        <button type="button" id="signIn" class="btn btn-primary mx-2">
+          Sign in
+        </button>
+        <button type="button" id="signOut" class="btn btn-success mx-2" hidden>
+          Sign out
+        </button>
+      </div>
+    </nav>
+    <br />
+    <h5 class="card-header text-center">
+      Electron sample app calling MS Graph API using MSAL Node
+      <br />
+      <small class="card-header text-center"
+        >Please login using the work or school account!</small
+      >
+    </h5>
+
+    <br />
+    <div class="row" style="margin: auto">
+      <div id="cardDiv" class="col-md-6" style="display: none; margin: auto">
+        <div class="card text-center">
+          <div class="card-body">
+            <h5 class="card-title" id="WelcomeMessage">
+              Please sign-in to see your profile and read your mails
+            </h5>
+            <div id="profileDiv"></div>
+            <br />
+            <br />
+            <button class="btn btn-primary" id="seeProfile">See Profile</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="../node_modules/jquery/dist/jquery.js"></script>
+    <script src="../node_modules/popper.js/dist/umd/popper.js"></script>
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.js"></script>
+
+    <script src="renderer.js"></script>
+  </body>
+</html>
