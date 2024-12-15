@@ -26,7 +26,7 @@ const createWindow = () => {
 app.on("ready", async () => {
   await createWindow();
   mainWindow.loadFile(path.join(__dirname, "./index.html"));
-  mainWindow.webContents.openDevTools();
+  // mainWindow.webContents.openDevTools();
 });
 
 // To set the app to exit

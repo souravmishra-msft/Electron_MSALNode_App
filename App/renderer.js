@@ -69,4 +69,9 @@ const setProfile = (data) => {
   profileDiv.appendChild(email);
   profileDiv.appendChild(phone);
   profileDiv.appendChild(address);
+
+  // Hide the "Show profile" button
+  if (seeProfileButton) {
+    seeProfileButton.style.display = "none";
+  }
 };
