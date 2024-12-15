@@ -1,62 +1,72 @@
 /** This file is used to modify the frontend */
-const welcomeDiv = document.getElementById('WelcomeMessage');
-const signInButton = document.getElementById('signIn');
-const signOutButton = document.getElementById('signOut');
-const seeProfileButton = document.getElementById('seeProfile');
-const cardDiv = document.getElementById('cardDiv');
-const profileDiv = document.getElementById('profileDiv');
+const welcomeDiv = document.getElementById("WelcomeMessage");
+const signInButton = document.getElementById("signIn");
+const signOutButton = document.getElementById("signOut");
+const seeProfileButton = document.getElementById("seeProfile");
+const cardDiv = document.getElementById("cardDiv");
+const profileDiv = document.getElementById("profileDiv");
 
 window.renderer.showWelcomeMessage((event, account) => {
-    if (!account)
-        return;
+  if (!account) return;
 
-    cardDiv.style.display = 'initial';
-    welcomeDiv.innerHTML = `Welcome ${account.name}`;
-    signInButton.hidden = true;
-    signOutButton.hidden = false;
+  cardDiv.style.display = "initial";
+  welcomeDiv.innerHTML = `Welcome ${account.name}`;
+  signInButton.hidden = true;
+  signOutButton.hidden = false;
 });
 
 window.renderer.handleProfileData((event, graphResponse) => {
-    if (!graphResponse)
-        return;
+  if (!graphResponse) return;
 
-    console.log(`Graph API responded at: ${new Date().toString()}`);
-    setProfile(graphResponse);
+  console.log(`Graph API responded at: ${new Date().toString()}`);
+  setProfile(graphResponse);
 });
 
 // UI Event Handlers
-signInButton.addEventListener('click', () => {
-    console.log(`signin clicked`)
-    window.renderer.sendLoginMessage();
+signInButton.addEventListener("click", () => {
+  console.log(`Signin Button clicked`);
+  window.renderer.sendLoginMessage();
 });
 
-signOutButton.addEventListener('click', () => {
-    window.renderer.sendSignOutMessage();
+signOutButton.addEventListener("click", () => {
+  console.log(`SignOut Button clicked`);
+  window.renderer.sendSignOutMessage();
 });
 
-seeProfileButton.addEventListener('click', () => {
-    window.renderer.sendCheckProfileMessage();
+seeProfileButton.addEventListener("click", () => {
+  console.log(`Show Profile Button clicked`);
+  window.renderer.sendCheckProfileMessage();
 });
 
 const setProfile = (data) => {
-    console.log(data)
-    if (!data)
-        return;
+  console.log(data);
+  if (!data) return;
 
-    profileDiv.innerHTML = '';
+  profileDiv.innerHTML = "";
 
-    const title = document.createElement('p');
-    const email = document.createElement('p');
-    const phone = document.createElement('p');
-    const address = document.createElement('p');
+  // Add Bootstrap class for left alignment
+  profileDiv.className = "text-start mt-3 text-left p-3 border rounded bg-light";
 
-    title.innerHTML = '<strong>Title: </strong>' + data.jobTitle;
-    email.innerHTML = '<strong>Mail: </strong>' + data.mail;
-    phone.innerHTML = '<strong>Phone: </strong>' + data.businessPhones[0];
-    address.innerHTML = '<strong>Location: </strong>' + data.officeLocation;
+  // Dynamically create profile fields with Bootstrap classes
+  const title = document.createElement("p");
+  title.className = "mb-1";
+  title.innerHTML = `<strong>Title:</strong> ${data.jobTitle || "N/A"}`;
 
-    profileDiv.appendChild(title);
-    profileDiv.appendChild(email);
-    profileDiv.appendChild(phone);
-    profileDiv.appendChild(address);
-}
+  const email = document.createElement("p");
+  email.className = "mb-1";
+  email.innerHTML = `<strong>Mail:</strong> ${data.mail || "N/A"}`;
+
+  const phone = document.createElement("p");
+  phone.className = "mb-1";
+  phone.innerHTML = `<strong>Phone:</strong> ${data.businessPhones[0] || "N/A"}`;
+
+  const address = document.createElement("p");
+  address.className = "mb-1";
+  address.innerHTML = `<strong>Location:</strong> ${data.officeLocation || "N/A"}`;
+
+  // Append the created elements to profileDiv
+  profileDiv.appendChild(title);
+  profileDiv.appendChild(email);
+  profileDiv.appendChild(phone);
+  profileDiv.appendChild(address);
+};
