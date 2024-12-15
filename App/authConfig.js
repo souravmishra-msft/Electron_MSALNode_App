@@ -1,30 +1,29 @@
 const { LogLevel } = require("@azure/msal-node");
 
-
 const msalConfig = {
-    auth: {
-        clientId: '6fa25587-12af-4887-a03b-253f1bfb74b3',
-        authority: 'https://login.microsoftonline.com/0891528f-b789-41ef-9d10-895a44f5f624'
+  auth: {
+    clientId: "<application-id captured from the app registration done in Entra ID>",
+    authority: "https://login.microsoftonline.com/<tenant-id>",
+  },
+  system: {
+    loggerOptions: {
+      loggerCallback(loglevel, message, containsPii) {
+        console.log(message);
+      },
+      piiLoggingEnabled: false,
+      logLevel: LogLevel.Verbose,
     },
-    system: {
-        loggerOptions: {
-            loggerCallback(loglevel, message, containsPii) {
-                console.log(message);
-            },
-            piiLoggingEnabled: false,
-            logLevel: LogLevel.Verbose,
-        },
-    },
+  },
 };
 
 const graphConfig = {
-    graphMe: {
-        endpoint: 'https://graph.microsoft.com/v1.0/me',
-        scopes: ['user.read']
-    }
+  graphMe: {
+    endpoint: "https://graph.microsoft.com/v1.0/me",
+    scopes: ["user.read"],
+  },
 };
 
 module.exports = {
-    msalConfig: msalConfig,
-    graphConfig: graphConfig
-}
+  msalConfig: msalConfig,
+  graphConfig: graphConfig,
+};
